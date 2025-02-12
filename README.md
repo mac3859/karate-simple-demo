@@ -1,6 +1,6 @@
 # Reward Service Test Project
 
-This project demonstrates API testing using the Karate framework to test a reward redemption service. It includes mock server implementation and test scenarios for reward redemption functionality.
+This a demo API testing using the Karate framework to test a reward redemption service (simplified replica of what I was working on). It includes mock server implementation and test scenarios for reward redemption functionality.
 
 ## Project Overview
 

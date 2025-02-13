@@ -1,6 +1,6 @@
 # Reward Service Test Project
 
-This a demo API testing using the Karate framework to test a reward redemption service (simplified replica of what I was working on). It includes mock server implementation and test scenarios for reward redemption functionality.
+This project demonstrates API testing using the Karate framework to test a reward redemption service. It includes mock server implementation and test scenarios for reward redemption functionality.
 
 ## Project Overview
 
@@ -67,6 +67,21 @@ The test scenarios are defined in `redeem-reward.feature`:
    - Points < 500
    - Expects 400 status code
    - Validates error response
+
+## CI/CD Configuration
+
+This project includes CI/CD configurations for both GitHub Actions and Azure Pipelines.
+
+### Azure Pipelines (Demo)
+
+The `azure-pipelines.yml` demonstrates a test automation setup in Azure DevOps with the following features:
+- Runs on Ubuntu latest agent
+- Uses Maven caching for faster builds
+- Configures JDK 17
+- Executes tests and publishes results
+- Generates and publishes Karate test reports
+
+Note: This is a demo configuration and requires proper Azure DevOps setup with appropriate service connections to be functional.
 
 ## Running the Tests
 

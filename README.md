@@ -1,3 +1,5 @@
+[Jump to Test result](#test-results-screenshot)
+
 # Reward Service Test Project
 
 This project demonstrates API testing using the Karate framework to test a reward redemption service. It includes mock server implementation and test scenarios for reward redemption functionality.
@@ -8,6 +10,7 @@ The project implements automated API tests for a reward redemption service with 
 - Reward points redemption
 - Points validation
 - Response handling for successful and failed scenarios
+- Mock server implementation with Karate's built-in mock server
 
 ## Prerequisites
 
@@ -20,10 +23,15 @@ The project implements automated API tests for a reward redemption service with 
 reward-service-test/
 ├── src/
 │   └── test/
+│       ├── java/
+│       │   └── reward/
+│       │       ├── RewardServiceTest.java     # Test runner
+│       │       └── mock/
+│       │           └── RewardMockServer.java  # Mock server configuration
 │       └── resources/
 │           └── reward/
 │               ├── features/
-│               │   └── redeem-reward.feature    # Test scenarios
+│               │   └── redeem-reward.feature  # Test scenarios
 │               └── mock/
 │                   └── RewardMockServer.feature # Mock server implementation
 └── pom.xml
@@ -31,7 +39,19 @@ reward-service-test/
 
 ## Mock Server Implementation
 
-The mock server is implemented in `RewardMockServer.feature` and provides:
+The mock server is implemented using Karate's built-in mock server functionality:
+
+### Mock Server Configuration
+
+The mock server is configured in `RewardMockServer.java`:
+- Runs on port 58987
+- Automatically starts before test execution
+- Automatically stops after test completion
+- Uses feature file-based mock responses
+
+### Mock API Endpoints
+
+The mock server (`RewardMockServer.feature`) provides:
 - Endpoint: `/redeem` (POST)
 - Response based on points threshold (500 points)
 - Success/failure response handling
@@ -54,7 +74,16 @@ Failure Response (Points < 500):
 }
 ```
 
-## Test Scenarios
+## Test Implementation
+
+### Test Runner
+
+The test runner (`RewardServiceTest.java`) is implemented using JUnit 5 and Karate:
+- Uses `@Karate.Test` annotation for test execution
+- Configures mock server URL via system property
+- Handles mock server lifecycle with `@BeforeAll` and `@AfterAll`
+
+### Test Scenarios
 
 The test scenarios are defined in `redeem-reward.feature`:
 
@@ -71,6 +100,14 @@ The test scenarios are defined in `redeem-reward.feature`:
 ## CI/CD Configuration
 
 This project includes CI/CD configurations for both GitHub Actions and Azure Pipelines.
+
+### GitHub Actions
+
+The workflow in `.github/workflows/test.yml` includes:
+- Automated test execution on push and pull requests
+- JDK 17 setup
+- Maven dependency caching
+- Test execution and report generation
 
 ### Azure Pipelines (Demo)
 
@@ -95,12 +132,22 @@ Test reports will be generated in the `target/karate-reports` directory.
 
 ## Configuration
 
-The mock server runs on `http://localhost:58987` by default. This configuration is defined in the test features.
+### Mock Server
+- Host: localhost
+- Port: 58987
+- Base URL: http://localhost:58987
 
 ## Test Reports
 
-Karate generates detailed HTML reports after test execution, including:
-- Request/response details
-- Test execution time
-- Test status (passed/failed)
-- Error messages for failed tests
+Karate generates comprehensive HTML reports after test execution:
+- Location: `target/karate-reports/`
+- Includes detailed request/response information
+- Test execution timeline
+- Test scenario status and duration
+
+### Test Results Screenshot
+
+![Screenshot 2025-02-14 at 11 43 02 AM](https://github.com/user-attachments/assets/3371d3bf-4cb8-4a21-9fdf-3af688dbc2dc)
+
+
+The screenshot above shows the actual test execution results from a sample test run.
